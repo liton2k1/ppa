@@ -78,42 +78,29 @@ const Curriculum = () => {
   const [openIndex, setOpenIndex] = useState(0);
 
   return (
-    <section className="relative bg-black flex flex-col items-center overflow-hidden py-24 px-4 sm:px-6">
-      {/* ── Pill badge ── */}
-      <div className="flex items-center gap-2 border border-white/10 bg-white/5 rounded-full px-4 py-1.5 mb-8">
+    <section className="relative bg-black flex flex-col items-center overflow-hidden py-24 px-5">
+      <div className="flex items-center gap-2 border border-blue-600/20 bg-white/5 rounded-lg px-4 py-1.5 mb-8">
         <span className="w-2 h-2 rounded-full bg-blue-500 inline-block" />
         <span className="text-white/70 text-xs tracking-wide">
           Course Curriculum
         </span>
       </div>
 
-      {/* ── Heading ── */}
-      <h2
-        className="text-white text-center font-bold leading-tight max-w-xl mx-auto mb-16 text-[clamp(1.8rem,4vw,2.6rem)]"
-        style={{ fontFamily: "'Sora', 'DM Sans', sans-serif" }}
-      >
+      <h2 className="text-white text-center font-normal leading-tight max-w-2xl mx-auto mb-16 text-xl md:text-4xl">
         Mastering Deep Work: A Structured Path to Peak Productivity
       </h2>
 
-      {/* ── Two column layout ── */}
       <div className="w-full max-w-5xl mx-auto flex flex-col lg:flex-row gap-10 items-start">
-        {/* ── Left: Accordion ── */}
         <div className="flex-1 w-full">
           {modules.map((mod, i) => (
             <div key={i}>
-              {/* Top gradient border */}
               <GradientLine />
-
-              {/* Module header */}
               <button
                 className="w-full flex items-start justify-between py-5 text-left gap-4"
                 onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
               >
                 <div>
-                  <p
-                    className="text-white font-semibold text-sm sm:text-base"
-                    style={{ fontFamily: "'Sora', sans-serif" }}
-                  >
+                  <p className="text-white font-semibold text-sm sm:text-base">
                     {mod.title}
                   </p>
                   <p className="text-white/40 text-xs mt-1">{mod.duration}</p>
@@ -127,7 +114,6 @@ const Curriculum = () => {
                 </span>
               </button>
 
-              {/* Lessons */}
               {openIndex === i && mod.lessons.length > 0 && (
                 <div className="pb-4 flex flex-col">
                   {mod.lessons.map((lesson, j) => (
@@ -136,11 +122,7 @@ const Curriculum = () => {
                       <div className="flex items-center justify-between py-3">
                         <div className="flex items-center gap-3">
                           <div
-                            className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                              lesson.preview
-                                ? "bg-white text-blue-600"
-                                : "text-black bg-white/20"
-                            }`}
+                            className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${lesson.preview ? "bg-white text-blue-600" : "text-black bg-white/20"}`}
                           >
                             <FiPlay
                               size={12}
@@ -148,10 +130,7 @@ const Curriculum = () => {
                               className="ml-0.5"
                             />
                           </div>
-                          <span
-                            className="text-white/80 text-sm"
-                            style={{ fontFamily: "'Sora', sans-serif" }}
-                          >
+                          <span className="text-white/80 text-sm">
                             {lesson.title}
                           </span>
                           {lesson.preview && (
@@ -170,38 +149,27 @@ const Curriculum = () => {
               )}
             </div>
           ))}
-
-          {/* Bottom border */}
           <GradientLine />
         </div>
 
-        {/* ── Right: Sticky card ── */}
-        <div className="w-full lg:w-75 shrink-0 rounded-2xl p-6 flex flex-col gap-5 lg:sticky lg:top-8 border border-blue-500/20 bg-linear-to-t from-black/80 to-black/50">
-          <h3
-            className="text-white font-bold text-lg leading-snug"
-            style={{ fontFamily: "'Sora', sans-serif" }}
-          >
+        <div className="w-full md:w-100 mx-auto shrink-0 rounded-2xl p-6 flex flex-col gap-5 lg:sticky lg:top-8 border border-blue-500/20 bg-linear-to-t from-black/80 to-black/50">
+          <h3 className="text-white font-bold text-lg leading-snug">
             Not only video lessons!
           </h3>
-
-          <ul className="flex flex-col gap-3">
+          <ul className="flex flex-col gap-7 mt-5">
             {perks.map((perk, i) => (
               <li key={i} className="flex items-start gap-3">
                 <MdCheckCircle
                   className="text-blue-500 shrink-0 mt-0.5"
                   size={16}
                 />
-                <span
-                  className="text-white/70 text-sm leading-snug"
-                  style={{ fontFamily: "'Sora', sans-serif" }}
-                >
+                <span className="text-white/70 md:text-sm text-xs leading-snug">
                   {perk}
                 </span>
               </li>
             ))}
           </ul>
-
-          <button className="w-full bg-blue-600 hover:bg-blue-500 active:scale-95 transition-all duration-200 text-white font-semibold text-sm py-3 rounded-xl mt-2 shadow-lg shadow-blue-700/30">
+          <button className="w-full bg-blue-600 hover:bg-blue-500 active:scale-95 transition-all duration-200 text-white font-semibold text-sm py-3 rounded-xl mt-5">
             Enroll now
           </button>
         </div>

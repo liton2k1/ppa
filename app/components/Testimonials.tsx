@@ -52,19 +52,16 @@ const Testimonials = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: "left" | "right") => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({
-        left: dir === "left" ? -320 : 320,
-        behavior: "smooth",
-      });
-    }
+    scrollRef.current?.scrollBy({
+      left: dir === "left" ? -320 : 320,
+      behavior: "smooth",
+    });
   };
 
   return (
     <section className="relative bg-black overflow-hidden py-24 px-4 sm:px-8">
-      {/* ── Pill badge ── */}
       <div className="flex justify-center mb-8">
-        <div className="flex items-center gap-2 border border-white/10 bg-white/5 rounded-full px-4 py-1.5">
+        <div className="flex items-center gap-2 border border-blue-600/20 bg-white/5 rounded-lg px-4 py-1.5">
           <span className="w-2 h-2 rounded-full bg-blue-500 inline-block" />
           <span className="text-white/70 text-xs tracking-wide">
             Testimonials
@@ -72,22 +69,15 @@ const Testimonials = () => {
         </div>
       </div>
 
-      {/* ── Heading ── */}
-      <h2
-        className="text-white text-center font-bold leading-tight mb-16 text-[clamp(2rem,5vw,3rem)]"
-        style={{ fontFamily: "'Sora', 'DM Sans', sans-serif" }}
-      >
+      <h2 className="text-white text-center font-normal leading-tight mb-16 text-2xl md:text-4xl">
         Real Results from
         <br />
         Real People
       </h2>
 
-      {/* ── Sub-row: label + arrows ── */}
       <div className="flex items-center justify-between max-w-6xl mx-auto mb-5">
-        <p className="text-white" style={{ fontFamily: "'Sora', sans-serif" }}>
-          Join with 5K other students
-        </p>
-        <div className="flex items-center gap-2">
+        <p className="text-white">Join with 5K other students</p>
+        <div className="flex items-center gap-5">
           <button
             onClick={() => scroll("left")}
             className="w-10 h-10 rounded-full bg-white/8 hover:bg-white/15 border border-white/10 flex items-center justify-center text-white/70 transition-all"
@@ -103,24 +93,15 @@ const Testimonials = () => {
         </div>
       </div>
 
-      {/* ── Cards scroll row ── */}
       <div
         ref={scrollRef}
-        className="flex gap-4 overflow-x-auto scrollbar-hide max-w-6xl mx-auto pb-2"
-        style={{ scrollSnapType: "x mandatory" }}
+        className="flex gap-4 overflow-x-auto scrollbar-hide max-w-6xl mx-auto pb-2 snap-x snap-mandatory"
       >
         {testimonials.map((t, i) => (
           <div
             key={i}
-            className="shrink-0 w-60 sm:w-65 rounded-2xl overflow-hidden relative flex flex-col justify-between border border-blue-500/20 bg-linear-to-t from-black/80 to-black/50 p-5"
-            style={{
-              scrollSnapAlign: "start",
-              minHeight: "300px",
-              background: t.video ? "none" : "rgba(255,255,255,0.04)",
-              //   border: "1px solid rgba(255,255,255,0.08)",
-            }}
+            className={`shrink-0 w-60 sm:w-65 rounded-2xl overflow-hidden relative flex flex-col justify-between border border-blue-500/20 p-5 min-h-[300px] snap-start ${t.video ? "" : "bg-white/4"}`}
           >
-            {/* Video bg */}
             {t.video && t.bg && (
               <>
                 <Image
@@ -134,9 +115,7 @@ const Testimonials = () => {
               </>
             )}
 
-            {/* Content */}
             <div className="relative z-10 flex flex-col justify-between h-full gap-6">
-              {/* Top: avatar */}
               <Image
                 src={t.avatar}
                 alt={t.name}
@@ -145,7 +124,6 @@ const Testimonials = () => {
                 className="w-9 h-9 rounded-full object-cover border border-white/20"
               />
 
-              {/* Middle: text or play button */}
               {t.video ? (
                 <div className="flex items-center justify-center flex-1">
                   <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
@@ -157,23 +135,14 @@ const Testimonials = () => {
                   </div>
                 </div>
               ) : (
-                <p
-                  className="text-white/80 text-xs leading-relaxed flex-1"
-                  style={{ fontFamily: "'Sora', sans-serif" }}
-                >
+                <p className="text-white/80 text-xs leading-relaxed flex-1">
                   {t.text}
                 </p>
               )}
 
-              {/* Bottom: name + role */}
               <div>
-                <p
-                  className="text-white font-semibold text-sm"
-                  style={{ fontFamily: "'Sora', sans-serif" }}
-                >
-                  {t.name}
-                </p>
-                <p className="text-white/50 text-xs mt-0.5">{t.role}</p>
+                <p className="text-white font-semibold text-sm">{t.name}</p>
+                <p className="text-white/70 text-xs mt-0.5">{t.role}</p>
               </div>
             </div>
           </div>
